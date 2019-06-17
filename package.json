@@ -1,0 +1,33 @@
+{
+  "name": "deepexi-onerror",
+  "version": "0.0.1",
+  "description": "koa-onerror middleware eggjs configurer for deepexi framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.test.js test/**/*.test.js --reporter spec",
+    "lint": "eslint .",
+    "cov": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov"
+  },
+  "keywords": [
+    "onerror",
+    "koa",
+    "deepexi",
+    "egg",
+    "eggjs",
+    "configurer"
+  ],
+  "author": "taccisum",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "assert": "^2.0.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
