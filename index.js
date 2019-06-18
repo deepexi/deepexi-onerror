@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const body = require('deepexi-body')
 
 module.exports = opt => {
   if (!opt) {
@@ -11,11 +12,7 @@ module.exports = opt => {
     },
     builder: {
       body (success, msg, stack) {
-        return {
-          success,
-          message: msg,
-          stack
-        }
+        return body.error(msg, stack)
       }
     }
   }, opt)
