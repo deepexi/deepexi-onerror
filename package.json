@@ -1,6 +1,6 @@
 {
   "name": "deepexi-onerror",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "koa-onerror middleware eggjs configurer for deepexi framework",
   "main": "index.js",
   "scripts": {
