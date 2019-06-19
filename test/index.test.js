@@ -109,7 +109,17 @@ describe('json()', () => {
       const bizerror = new Error('biz error')
       bizerror.status = 406
       onerror().json(bizerror, ctx)
+      assert(ctx.body.code === -1)
       assert(ctx.body.message === 'biz error')
+    })
+
+    it('should display error code when spec', () => {
+      const ctx = mockCtx()
+      const bizerror = new Error()
+      bizerror.status = 406
+      bizerror.code = 999
+      onerror().json(bizerror, ctx)
+      assert(ctx.body.code === 999)
     })
 
     it('should display error message on custom bizerror status', () => {

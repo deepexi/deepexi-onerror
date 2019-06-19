@@ -9,43 +9,33 @@ module.exports = opt => {
     stack: {},
     status: {
       biz: 406
-    },
-    builder: {
-      body (success, msg, stack) {
-        return body.error(msg, stack)
-      }
     }
   }, opt)
 
   return {
     json (err, ctx) {
-      const success = false
-      let msg
-      let stack
-
       const status = err.unsafeStatus || err.status || 500 // 支持自定义http状态
+      ctx.status = status
 
       const bizErrorStatus = options.status.biz
 
-      if (err.status === bizErrorStatus) {
-        msg = err.message
+      if (status === bizErrorStatus) {
+        ctx.body = body.fail(err.code, err.message)
       } else {
-        msg = 'Internal Server Error'
+        let stack
+        let outStack = options.stack.out
+
+        if (outStack === undefined || outStack === null) {
+          const env = ctx.app.config.env
+          outStack = env !== 'prod'
+        }
+
+        if (outStack) {
+          stack = err.stack
+        }
+
+        ctx.body = body.error('Internal Server Error', stack)
       }
-
-      let outStack = options.stack.out
-
-      if (outStack === undefined || outStack === null) {
-        const env = ctx.app.config.env
-        outStack = env !== 'prod'
-      }
-
-      if (outStack) {
-        stack = err.stack
-      }
-
-      ctx.status = status
-      ctx.body = options.builder.body(success, msg, stack)
     }
   }
 }
