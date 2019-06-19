@@ -59,7 +59,7 @@ config.onerror = onerror({
 const err = new Error('biz err');
 err.status = 406;
 // err.unsafeStatus = 430;  // 效果等同status，不同的是status只支持标准的HTTP状态码，而unsafeStatus可以让你使用非标准的HTTP状态码（如430）
-err.code = 999;
+err.code = 'DO-999';
 throw err;
 ```
 
@@ -67,8 +67,8 @@ throw err;
 ```json
 {
     "success": false,
-    "message": "biz err",   // 异常信息
-    "code": 999 // 错误码
+    "message": "biz err",
+    "code": "DO-999"
 }
 ```
 
@@ -79,6 +79,7 @@ throw err;
 1. 一般意味着服务端代码错误
 2. 错误信息不会展示给前端用户
 3. 非生产环境会有堆栈信息返回，方便问题排查
+4. 错误码固定为-2
 
 下面代码显示如何抛出一个系统异常
 
@@ -90,8 +91,8 @@ throw new Error('system err');
 ```json
 {
     "success": false,
-    "message": "Internal Server Error",   // 异常信息固定
-    "code": -2, // 错误码固定为-2
-    "stack": "..."  // 错误堆栈信息，默认在非prod环境下才有
+    "message": "Internal Server Error",
+    "code": -2,
+    "stack": "..."
 }
 ```
