@@ -128,7 +128,45 @@ describe('json()', () => {
       bizerror.status = 430
       onerror({
         status: {
-          biz: 430
+          fail: [ 430 ]
+        }
+      }).json(bizerror, ctx)
+      assert(ctx.body.message === 'biz error')
+    })
+
+    it('should support custom fail condition by function', () => {
+      const ctx = mockCtx()
+      const bizerror = new Error('biz error')
+      bizerror.status = 430
+      onerror({
+        status: {
+          fail: status => {
+            return status === 430
+          }
+        }
+      }).json(bizerror, ctx)
+      assert(ctx.body.message === 'biz error')
+    })
+
+    it('should support custom fail condition by regexp', () => {
+      const ctx = mockCtx()
+      const bizerror = new Error('biz error')
+      bizerror.status = 430
+      onerror({
+        status: {
+          fail: /4[0-9]{2}/
+        }
+      }).json(bizerror, ctx)
+      assert(ctx.body.message === 'biz error')
+    })
+
+    it('should support custom fail condition by basic type', () => {
+      const ctx = mockCtx()
+      const bizerror = new Error('biz error')
+      bizerror.status = 430
+      onerror({
+        status: {
+          fail: '430'
         }
       }).json(bizerror, ctx)
       assert(ctx.body.message === 'biz error')
