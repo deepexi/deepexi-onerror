@@ -58,7 +58,7 @@ config.onerror = onerror({
 ```js
 const err = new Error('biz err');
 err.status = 406;
-// err.unsafeStatus = 406;  // 效果等同status，不同的是status只支持标准的HTTP状态码，而unsafeStatus可以让你使用非标准的HTTP状态码（如430）
+// err.unsafeStatus = 430;  // 效果等同status，不同的是status只支持标准的HTTP状态码，而unsafeStatus可以让你使用非标准的HTTP状态码（如430）
 err.code = 999;
 throw err;
 ```
