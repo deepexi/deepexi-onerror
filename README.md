@@ -36,7 +36,7 @@ config.onerror = onerror({
         out: true,  // 强制输出堆栈信息，即使是生产环境下
     },
     status: {
-      biz: 406,  // 错误信息状态码
+      biz: 406,  // 哪些错误码被认为是业务异常
     }
 })
 ```
