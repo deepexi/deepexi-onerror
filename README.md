@@ -17,7 +17,7 @@
 ### 安装依赖
 
 ```bash
-$ npm i deepexi-onerror
+$ npm i deepexi-onerror --save
 ```
 
 ### 通过configurer配置你的onerror中间件
